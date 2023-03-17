@@ -12,6 +12,7 @@ struct ContentView: View {
    @State var cpuCard = "back"
    @State var playerScore = 0
    @State var cpuScore = 0
+   @State var showAlert = false
 
    var body: some View {
       ZStack {
@@ -38,11 +39,19 @@ struct ContentView: View {
                Image("button")
             }
 
-            Button {
-               reset()
-            } label: {
+            Button(action: {
+               showAlert = true
+            }, label: {
                Text("Reset")
                   .foregroundColor(.white)
+            })
+            .alert(isPresented: $showAlert) {
+               Alert(title: Text("Reset"),
+                     message: Text("Are you sure you want to reset?"),
+                     primaryButton: .destructive(Text("Yes")) {
+                        reset()
+                     },
+                     secondaryButton: .cancel())
             }
 
             Spacer()
