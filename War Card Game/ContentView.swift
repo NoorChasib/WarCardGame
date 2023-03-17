@@ -38,6 +38,13 @@ struct ContentView: View {
                Image("button")
             }
 
+            Button {
+               reset()
+            } label: {
+               Text("Reset")
+                  .foregroundColor(.white)
+            }
+
             Spacer()
             HStack {
                Spacer()
@@ -68,11 +75,11 @@ struct ContentView: View {
    func deal() {
       // Randomize the player card
       var playerCardValue = Int.random(in: 2...14)
-      playerCard = "card" + String(playerCardValue)
+      playerCard = "card\(playerCardValue)"
 
       // Randomize the cpu card
       var cpuCardValue = Int.random(in: 2...14)
-      cpuCard = "card" + String(cpuCardValue)
+      cpuCard = "card\(cpuCardValue)"
 
       // Update the score
       if playerCardValue > cpuCardValue {
@@ -83,6 +90,17 @@ struct ContentView: View {
          // Add 1 to cpu score
          cpuScore += 1
       }
+   }
+
+   func reset() {
+      // Reset player card
+      playerCard = "back"
+      // Reset cpu card
+      cpuCard = "back"
+      // Reset player score
+      playerScore = 0
+      // Reset cpu score
+      cpuScore = 0
    }
 }
 
